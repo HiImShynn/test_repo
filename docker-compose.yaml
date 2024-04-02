@@ -1,0 +1,18 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8080:8000"
+    command: python ./backend/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/backend
+    
+  frontend:
+    build: ./frontend
+    ports:
+      - "5400:5173"
+    # "dev": "vite --host 0.0.0.0" in package.json
+    command: sh -c "cd ./frontend && npm install && npm run dev"
+    volumes:
+      - .:/frontend
+
